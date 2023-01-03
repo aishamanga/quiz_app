@@ -248,6 +248,33 @@ class _signupPageState extends State<signupPage> {
         ));
   }
 
+  final dropdownList = ["Student", "Lecturer"];
+  String dropdownValue = "Student";
+  Widget buildDropDown() {
+    return Container(
+      child: DropdownButtonFormField(
+        value: dropdownValue,
+        items: dropdownList
+            .map((e) => DropdownMenuItem(
+                child: Text(
+                  e,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                value: e))
+            .toList(),
+        onChanged: (val) {
+          setState(() {
+            dropdownValue = val as String;
+          });
+        },
+        icon: Icon(
+          Icons.arrow_drop_down_circle,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -277,6 +304,7 @@ class _signupPageState extends State<signupPage> {
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     ),
+                    buildDropDown(),
                     SizedBox(
                       height: 5,
                     ),
