@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'signupPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class loginPage extends StatefulWidget {
   const loginPage({super.key});
@@ -10,6 +12,12 @@ class loginPage extends StatefulWidget {
 
 class _loginPageState extends State<loginPage> {
   @override
+  final emailController = TextEditingController(); //adding email controoler
+  final passwordController =
+      TextEditingController(); //adding password contollers
+
+  User? user = FirebaseAuth.instance.currentUser;
+
   Widget buildEmail() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,6 +41,7 @@ class _loginPageState extends State<loginPage> {
               ]),
           height: 60,
           child: TextField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -73,6 +82,7 @@ class _loginPageState extends State<loginPage> {
               ]),
           height: 60,
           child: TextField(
+            controller: passwordController,
             obscureText: true,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -111,7 +121,11 @@ class _loginPageState extends State<loginPage> {
         padding: EdgeInsets.symmetric(vertical: 25),
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+            setState(() {});
+          },
           child: Text(
             "Log In",
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
