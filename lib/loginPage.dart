@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'signupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-class loginPage extends StatefulWidget {
-  const loginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<loginPage> createState() => _loginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _loginPageState extends State<loginPage> {
+class _LoginPageState extends State<LoginPage> {
   @override
   final emailController = TextEditingController(); //adding email controoler
   final passwordController =
@@ -22,37 +21,42 @@ class _loginPageState extends State<loginPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           "Email",
           style: TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black, blurRadius: 6, offset: Offset(0, 2))
-              ]),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 6,
+                offset: Offset(0, 2),
+              )
+            ],
+          ),
           height: 60,
           child: TextField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: Colors.blue,
-                ),
-                hintText: "Enter Email",
-                hintStyle: TextStyle(color: Colors.black)),
+            style: const TextStyle(color: Colors.black),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.blue,
+              ),
+              hintText: "Enter Email",
+              hintStyle: TextStyle(color: Colors.black),
+            ),
           ),
         )
       ],
@@ -63,37 +67,42 @@ class _loginPageState extends State<loginPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           "Password",
           style: TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black, blurRadius: 6, offset: Offset(0, 2))
-              ]),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 6,
+                offset: Offset(0, 2),
+              )
+            ],
+          ),
           height: 60,
           child: TextField(
             controller: passwordController,
             obscureText: true,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                  Icons.lock,
-                  color: Colors.blue,
-                ),
-                hintText: "Enter Password",
-                hintStyle: TextStyle(color: Colors.black)),
+            style: const TextStyle(color: Colors.black),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14),
+              prefixIcon: Icon(
+                Icons.lock,
+                color: Colors.blue,
+              ),
+              hintText: "Enter Password",
+              hintStyle: TextStyle(color: Colors.black),
+            ),
           ),
         )
       ],
@@ -110,95 +119,110 @@ class _loginPageState extends State<loginPage> {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15))),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
       ),
     );
   }
 
   Widget buildLoginBtn() {
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 25),
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: () async {
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-                email: emailController.text, password: passwordController.text);
-            setState(() {});
-          },
-          child: Text(
-            "Log In",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      padding: const EdgeInsets.symmetric(vertical: 25),
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () async {
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
+          setState(() {});
+        },
+        child: Text(
+          "Log In",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15))),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget buildSignUpBtn() {
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 25),
-        width: double.infinity,
-        child: TextButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => signupPage()));
-            },
-            child: Text("Don\'t have an Account? Sign Up",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold))));
+      padding: EdgeInsets.symmetric(vertical: 25),
+      width: double.infinity,
+      child: TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SignupPage(),
+            ),
+          );
+        },
+        child: Text(
+          "Don\'t have an Account? Sign Up",
+          style: TextStyle(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      child: GestureDetector(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: BoxDecoration(
+      body: Container(
+        child: GestureDetector(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Colors.blue,
-                    Colors.white,
-                  ])),
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Sign In",
-                      style: TextStyle(
-                          fontSize: 40,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    buildEmail(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    buildPassword(),
-                    buildForgotPasswordBtn(),
-                    buildLoginBtn(),
-                    buildSignUpBtn(),
-                  ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.blue,
+                      Colors.white,
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
+                child: SingleChildScrollView(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        "Sign In",
+                        style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      buildEmail(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      buildPassword(),
+                      buildForgotPasswordBtn(),
+                      buildLoginBtn(),
+                      buildSignUpBtn(),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }
